@@ -8,7 +8,7 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 
 ### Prerequisites
 
-- Node.js and npm (If not installed, download from [Node.js official website](https://nodejs.org/))
+- Node.js v18x and npm (If not installed, download from [Node.js official website](https://nodejs.org/))
 
 ### Steps
 
