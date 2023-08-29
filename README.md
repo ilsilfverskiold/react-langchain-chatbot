@@ -42,6 +42,7 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 
 3. **Q/A with URL**: Go to langchain_options and find CloudflateWorkersRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. 
 - Make sure you set REACT_APP_CLOUDFLARE_WORKERS_AUTH in your .env file that you have set up with your Worker
+- Make sure you set the URL for the POST request to the endpoint that you'll receive with the deployment of your worker
 - If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (this you set up via your worker)
 
 
