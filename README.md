@@ -1,6 +1,6 @@
 # React-Langchain-Chatbot
 
-Basic ChatGPT clone using OpenAI GPT-3.5-Turbo or GPT-4 via Langchain.
+Basic ChatGPT clone using OpenAI GPT-3.5-Turbo or GPT-4 via Langchain. Good playground for Langchain AI chatbots.
 
 Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-chatbot-kit-docs/docs/getting-started) and [LangchainJS](https://js.langchain.com/docs/get_started/introduction).
 
