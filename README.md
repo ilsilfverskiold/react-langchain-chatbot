@@ -36,8 +36,7 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 
 ## Options
 
-1. **ChatGPT Clone**: 
-- The script has already been set in src/components/LangchainProcessor.js so you can run it as is. If you want to change the prompt template you can do so directly in this file.
+1. **ChatGPT Clone**: The script has already been set in src/components/LangchainProcessor.js so you can run it as is. If you want to change the prompt template you can do so directly in this file.
 
 2. **A Simple Chain**: Go to langchain_options and find SimpleChain.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. You can build on top of this yourself but at the moment it is only using the question and not allowing for past answers. Make sure you tweak the prompt template in there.
 
