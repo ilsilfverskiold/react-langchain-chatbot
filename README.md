@@ -34,12 +34,17 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
    ```bash
    npm start
 
-### Work with the langchain processor component
+## Options
 
-Go to src/components/LangchainProcessor.js
+1. **ChatGPT Clone**: 
+- The script has already been set in src/components/LangchainProcessor.js so you can run it as is. If you want to change the prompt template you can do so directly in this file.
 
-This is a functional component for simplicity, you have access to newMessage and oldMessages so do as you please here. Just remember to return a response to the message.
-At the moment this is using the basic chat model by [Langchain](https://js.langchain.com/docs/get_started/quickstart#chat-models) by returning an array with system + human messages for every new prompt.
+2. **A Simple Chain**: Go to langchain_options and find SimpleChain.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. You can build on top of this yourself but at the moment it is only using the question and not allowing for past answers. Make sure you tweak the prompt template in there.
+
+3. **Q/A with URL**: Go to langchain_options and find CloudflateWorkersRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. 
+- Make sure you set REACT_APP_CLOUDFLARE_WORKERS_AUTH in your .env file that you have set up with your Worker
+- If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (this you set up via your worker)
+
 
 
 

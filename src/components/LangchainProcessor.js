@@ -6,39 +6,45 @@ import { HumanMessage, SystemMessage } from "langchain/schema";
 // you can log the newMessage and oldMessages to see what they look like
 
 const LangchainProcessor = async (newMessage, oldMessages) => {
+  // Remember to add your OpenAI API key to the .env file
+  const chat = new ChatOpenAI({
+    temperature: 0,
+    openAIApiKey: process.env.REACT_APP_OPEN_AI_API_KEY,
+  });
 
-    // (!!) remember to add your OpenAI API key to the .env file
-    const chat = new ChatOpenAI({
-        temperature: 0,
-        openAIApiKey: process.env.REACT_APP_OPEN_AI_API_KEY
+  const template =
+    "You are an ironic and nihilistic chatbot so always answer like so. Don't answer in a 'response: answer' format. Question: {question}";
+
+  try {
+    // recreate the formatted messages array with the previous messages every time a new message comes in from the user
+    const formattedMessages = oldMessages.map((msg) => {
+      if (msg.type === "bot") {
+        return new SystemMessage(msg.message);
+      } else {
+        return new HumanMessage(msg.message);
+      }
     });
 
-    try {
-        // recreate the formatted messages array with the previous messages every time a new message comes in from the user
-        const formattedMessages = oldMessages.map(msg => {
-            if (msg.type === "bot") {
-                return new SystemMessage(msg.message);
-            } else {
-                return new HumanMessage(msg.message);
-            }
-        });
+    // create the new prompt with the question and the template
+    const prompt = template.replace("{question}", newMessage);
 
-        // Add the new human message to the list
-        formattedMessages.push(new HumanMessage(newMessage));
+    // Add the new human message to the list
+    formattedMessages.push(new HumanMessage(prompt));
 
-        // call OpenAI to get a reply
-        const result = await chat.predictMessages(formattedMessages);
+    console.log(formattedMessages);
 
-        // Extract the content from the AIMessage
-        const botResponseContent = result.content;
+    // call OpenAI to get a reply
+    const result = await chat.predictMessages(formattedMessages);
 
-        // return the response
-        return botResponseContent;
+    // Extract the content from the AIMessage
+    const botResponseContent = result.content;
 
-    } catch (error) {
-        console.error("Error processing message with OpenAI:", error);
-        return "Sorry, I faced an error processing your message.";
-    }
-}
+    // return the response
+    return botResponseContent;
+  } catch (error) {
+    console.error("Error processing message with OpenAI:", error);
+    return "Sorry, I faced an error processing your message.";
+  }
+};
 
 export default LangchainProcessor;
