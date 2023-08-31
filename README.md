@@ -45,7 +45,7 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 - Make sure you set the URL for the POST request to the endpoint that you'll receive with the deployment of your worker
 - If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (this you set up via your worker)
 
-4. **Q/A with Text file**: Here you will first need to set up your AWS application correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find AWSRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Or just replace the code directly in the LangchainProcessor.js component.
+4. **Q/A with Text file**: Here you will first need to set up your AWS application correctly. See [this repository](https://github.com/ilsilfverskiold/langchainjs-aws-service) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find AWSRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Or just replace the code directly in the LangchainProcessor.js component.
 - Make sure you set all your process.env keys in a .env file
 
    ```bash
