@@ -61,7 +61,3 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
       "Access-Control-Allow-Origin": "http://localhost:3000",
       "Access-Control-Allow-Credentials": true,
    }
-
-
-
-
