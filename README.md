@@ -40,10 +40,27 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 
 2. **A Simple Chain**: Go to langchain_options and find SimpleChain.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. You can build on top of this yourself but at the moment it is only using the question and not allowing for past answers. Make sure you tweak the prompt template in there.
 
-3. **Q/A with URL**: Go to langchain_options and find CloudflateWorkersRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. 
+3. **Q/A with URL**: Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find CloudflateWorkersRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. 
 - Make sure you set REACT_APP_CLOUDFLARE_WORKERS_AUTH in your .env file that you have set up with your Worker
 - Make sure you set the URL for the POST request to the endpoint that you'll receive with the deployment of your worker
 - If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (this you set up via your worker)
+
+4. **Q/A with Text file**: Here you will first need to set up your AWS application correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find AWSRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Or just replace the code directly in the LangchainProcessor.js component.
+- Make sure you set all your process.env keys in a .env file
+
+   ```bash
+   REACT_APP_OPEN_AI_API_KEY=
+   REACT_APP_AWS_POST_URL=https://xxxx.execute-api.eu-central-1.amazonaws.com/dev/question
+   REACT_APP_AWS_API_KEY=
+   REACT_APP_AWS_BUCKET_NAME=my-langchain-bucket
+
+- If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (look at your AWS lambda scripts)
+
+   ```javascript
+   headers: {
+      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Access-Control-Allow-Credentials": true,
+   }
 
 
 
