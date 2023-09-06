@@ -8,7 +8,7 @@ import { HumanMessage, SystemMessage } from "langchain/schema";
 
 const LangchainProcessor = async (newMessage, oldMessages) => {
 
-    // CHANGE THIS (!)
+    // The default prompt template is
     const promptTemplate = `
     You are an ironic and nihilistic chatbot so always answer like so. Don't answer in a "response: answer" format.
     Question: {question}

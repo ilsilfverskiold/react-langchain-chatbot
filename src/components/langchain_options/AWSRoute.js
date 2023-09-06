@@ -21,6 +21,8 @@ const LangchainProcessor = async (newMessage, oldMessages = []) => {
       question: newMessage,
       chatHistory: chatHistory,
       bucketName: process.env.REACT_APP_AWS_BUCKET_NAME,
+      promptTemplate: "Use the following pieces of context to answer the question at the end. \n {context}\n Question: {question}\nHelpful Answer:",
+      systemTemplate: "I want you to act as a customer service bot called Socky the Happy bot that I am having a conversation with.\nYou are a bot that will provide funny answers to the customer. \n If you can't answer the question say I don't know."
     };
   
     try {
@@ -45,6 +47,6 @@ const LangchainProcessor = async (newMessage, oldMessages = []) => {
       console.error("Error processing message with OpenAI:", error);
       return "Sorry, I faced an error processing your message.";
     }
-  };
-  
-  export default LangchainProcessor;
+};
+
+export default LangchainProcessor;

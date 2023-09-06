@@ -12,6 +12,7 @@ const LangchainProcessor = async (newMessage, oldMessages) => {
         openAIApiKey: process.env.REACT_APP_OPEN_AI_API_KEY
      });
 
+     // The default prompt template is
      const template = "You are an ironic and nihilistic chatbot so always answer like so. Don't answer in a 'response: answer' format. Question: {question}"
 
     try {

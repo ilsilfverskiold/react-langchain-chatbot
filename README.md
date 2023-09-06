@@ -26,8 +26,10 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 4. **Set Up OpenAI API Key**:
 
 - Obtain your OpenAI API key.
-- Create a .env file in the root directory.
-- Add: REACT_APP_OPEN_AI_API_KEY=your_openai_api_key (Replace with your key)
+- Create a .env file in the root directory and add your OpenAI key.
+
+   ```bash
+   REACT_APP_OPEN_AI_API_KEY=your_openai_api_key
 
 4. **Start the Server**:
    
@@ -36,16 +38,25 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
 
 ## Options
 
-1. **ChatGPT Clone**: The script has already been set in src/components/LangchainProcessor.js so you can run it as is. If you want to change the prompt template you can do so directly in this file.
+1. **ChatGPT Clone**: The script has already been set in `src/components/LangchainProcessor.js` so you can run it as is. If you want to change the prompt template you can do so directly in this file.
 
-2. **A Simple Chain**: Go to langchain_options and find SimpleChain.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. You can build on top of this yourself but at the moment it is only using the question and not allowing for past answers. Make sure you tweak the prompt template in there.
+   ```javascript
+   // The default prompt template is
+    const promptTemplate = `
+      You are an ironic and nihilistic chatbot so always answer like so. Don't answer in a "response: answer" format.
+      Question: {question}
+    `;
+   ```
 
-3. **Q/A with URL**: Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find CloudflateWorkersRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. 
+2. **A Simple Chain**: Go to `/langchain_options` and find `SimpleChain.js` rename it `LangchainProcessor.js` and replace it with the `LangchainProcessor.js` in the components folder. You can build on top of this yourself but at the moment it is only using the question and not allowing for past answers. Make sure you tweak the prompt template in there.
+
+3. **Q/A with URL**: Here you will first need to set up your Workers route correctly. See [this repository](https://github.com/ilsilfverskiold/cloudflare-workers-langchain) that will go through it step by step. When you have a working endpoint, go to `/langchain_options` in this directory and find `CloudflateWorkersRoute.js` rename it `LangchainProcessor.js` and replace it with the `LangchainProcessor.js` in the components folder. 
 - Make sure you set REACT_APP_CLOUDFLARE_WORKERS_AUTH in your .env file that you have set up with your Worker
 - Make sure you set the URL for the POST request to the endpoint that you'll receive with the deployment of your worker
 - If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (this you set up via your worker)
 
-4. **Q/A with Text file**: Here you will first need to set up your AWS application correctly. See [this repository](https://github.com/ilsilfverskiold/langchainjs-aws-service) that will go through it step by step. When you have a working endpoint, go to langchain_options in this directory and find AWSRoute.js rename it LangchainProcessor.js and replace it with the LangchainProcessor.js in the components folder. Or just replace the code directly in the LangchainProcessor.js component.
+4. **Q/A with Text file**: Here you will first need to set up your AWS application correctly. See [this repository](https://github.com/ilsilfverskiold/langchainjs-aws-service) or [this tutorial](https://medium.com/gitconnected/deploying-an-ai-powered-q-a-bot-on-aws-with-langchainjs-and-serverless-9361d0778fbd) that will go through it step by step. When you have a working endpoint, go to `/langchain_options` in this directory and find `AWSRoute.js` rename it `LangchainProcessor.js` and replace it with the `LangchainProcessor.js` in the components folder. Or just replace the code directly in the `LangchainProcessor.js` component.
+
 - Make sure you set all your process.env keys in a .env file
 
    ```bash
@@ -54,10 +65,15 @@ Boostrapping with [React-Chatbot-Kit](https://fredrikoseberg.github.io/react-cha
    REACT_APP_AWS_API_KEY=
    REACT_APP_AWS_BUCKET_NAME=my-langchain-bucket
 
-- If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (look at your AWS lambda scripts)
+- To set your system and prompt template look into the code in `AWSRoute.js` 
 
    ```javascript
-   headers: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-      "Access-Control-Allow-Credentials": true,
-   }
+    // Define the request body
+    const requestBody = {
+      ...
+      promptTemplate: "Use the following pieces of context to answer the question at the end. \n {context}\n Question: {question}\nHelpful Answer:",
+      systemTemplate: "I want you to act as a customer service bot called Socky the Happy bot that I am having a conversation with.\nYou are a bot that will provide funny answers to the customer. \n If you can't answer the question say I don't know."
+    };
+    ```
+
+- If you are experiencing CORS errors Make sure you allow your IP to access the endpoint (look at your AWS lambda scripts)
